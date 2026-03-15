@@ -1,0 +1,37 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug Server",
+      "skipFiles": ["<node_internals>/**"],
+      "program": "${workspaceFolder}/NexusNews/server/dist/index.js",
+      "preLaunchTask": "build-server",
+      "outFiles": ["${workspaceFolder}/NexusNews/server/dist/**/*.js"],
+      "sourceMaps": true,
+      "runtimeArgs": ["--env-file=${workspaceFolder}/NexusNews/server/.env"],
+      "cwd": "${workspaceFolder}/NexusNews/server",
+      "env": {
+        "NODE_ENV": "development"
+      }
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug LLM2",
+      "program": "${workspaceFolder}/NexusNews/llm2/index.js",
+      "cwd": "${workspaceFolder}/NexusNews/llm2",
+      "env": {
+        "NODE_ENV": "development"
+      }
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Debug Both Services",
+      "configurations": ["Debug Server", "Debug LLM2"],
+      "preLaunchTask": "build-server"
+    }
+  ]
+}
